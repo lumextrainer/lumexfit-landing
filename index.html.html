@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="LUMEXFIT — O app premium para personal trainers autônomos. Prescreva treinos, acompanhe alunos e cresça sua carreira."/>
+<title>LUMEXFIT — App para Personal Trainer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080808;--bg2:#111;--bg3:#181818;--bg4:#222;
+  --acc:#B8FF00;--acc2:#FF4D00;
+  --text:#F0F0E8;--text2:#888;--text3:#444;
+  --border:#1F1F1F;--border2:#2A2A2A;
+  --fh:'Bebas Neue',sans-serif;
+  --fb:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--bg);color:var(--text);overflow-x:hidden;font-size:16px;-webkit-font-smoothing:antialiased}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 5%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;transition:all .3s}
+nav.scrolled{background:rgba(8,8,8,.92);border-bottom-color:var(--border);backdrop-filter:blur(12px)}
+.nav-logo{font-family:var(--fh);font-size:1.6rem;letter-spacing:2px;color:var(--text)}
+.nav-logo span{color:var(--acc)}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:.85rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--acc);color:#000;padding:.5rem 1.3rem;border-radius:4px;font-family:var(--fh);font-size:.95rem;letter-spacing:.5px;text-decoration:none;transition:opacity .2s}
+.nav-cta:hover{opacity:.85;color:#000}
+
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:7rem 5% 4rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(184,255,0,.07),transparent 70%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.3;pointer-events:none;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent)}
+.hero-content{max-width:780px;text-align:center;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(184,255,0,.08);border:1px solid rgba(184,255,0,.2);border-radius:30px;padding:.35rem 1rem;font-size:.75rem;font-weight:600;color:var(--acc);letter-spacing:.08em;margin-bottom:1.5rem;animation:fadeUp .8s ease both}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--acc);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.hero h1{font-family:var(--fh);font-size:clamp(3.5rem,9vw,7rem);letter-spacing:2px;line-height:.95;margin-bottom:1.5rem;animation:fadeUp .8s .1s ease both}
+.hero h1 span{color:var(--acc)}
+.hero-sub{font-size:clamp(1rem,2.5vw,1.2rem);color:var(--text2);line-height:1.7;max-width:560px;margin:0 auto 2.5rem;font-weight:300;animation:fadeUp .8s .2s ease both}
+.hero-actions{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;animation:fadeUp .8s .3s ease both}
+.btn-hero{background:var(--acc);color:#000;padding:.85rem 2.2rem;border-radius:4px;font-family:var(--fh);font-size:1.1rem;letter-spacing:1px;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-hero:hover{opacity:.88;transform:translateY(-1px)}
+.btn-ghost-hero{border:1px solid var(--border2);color:var(--text2);padding:.85rem 2rem;border-radius:4px;font-size:.9rem;text-decoration:none;transition:all .2s;font-weight:500}
+.btn-ghost-hero:hover{border-color:var(--text2);color:var(--text)}
+.hero-stats{display:flex;align-items:center;justify-content:center;gap:3rem;margin-top:3.5rem;animation:fadeUp .8s .4s ease both;flex-wrap:wrap}
+.hero-stat-n{font-family:var(--fh);font-size:2.2rem;letter-spacing:1px;color:var(--acc);display:block;line-height:1}
+.hero-stat-l{font-size:.72rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-top:.2rem}
+
+section{padding:6rem 5%}
+.section-tag{font-size:.7rem;color:var(--acc);font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.section-tag::before{content:'';width:20px;height:1px;background:var(--acc)}
+.section-title{font-family:var(--fh);font-size:clamp(2.2rem,5vw,3.5rem);letter-spacing:1px;line-height:1;margin-bottom:1rem}
+.section-title span{color:var(--acc)}
+.section-sub{font-size:1rem;color:var(--text2);line-height:1.7;max-width:520px}
+
+.problema-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;max-width:1100px;margin:0 auto}
+@media(max-width:768px){.problema-grid{grid-template-columns:1fr}}
+.dor-list{list-style:none;margin-top:2rem}
+.dor-item{display:flex;align-items:flex-start;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--border)}
+.dor-item:last-child{border-bottom:none}
+.dor-icon{width:36px;height:36px;border-radius:6px;background:rgba(255,77,0,.1);border:1px solid rgba(255,77,0,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.dor-icon svg{width:16px;height:16px;stroke:#FF4D00;fill:none;stroke-width:2;stroke-linecap:round}
+.dor-text{font-size:.95rem;color:var(--text2);line-height:1.6}
+.dor-text strong{color:var(--text);font-weight:600}
+
+.features{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:3rem auto 0}
+@media(max-width:900px){.features-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.features-grid{grid-template-columns:1fr}}
+.feat-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:border-color .2s;position:relative;overflow:hidden}
+.feat-card:hover{border-color:var(--border2)}
+.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--acc);opacity:0;transition:opacity .2s}
+.feat-card:hover::before{opacity:1}
+.feat-icon{width:44px;height:44px;border-radius:8px;background:rgba(184,255,0,.08);border:1px solid rgba(184,255,0,.15);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.feat-icon svg{width:20px;height:20px;stroke:var(--acc);fill:none;stroke-width:1.8;stroke-linecap:round}
+.feat-title{font-family:var(--fh);font-size:1.1rem;letter-spacing:.5px;margin-bottom:.5rem}
+.feat-desc{font-size:.85rem;color:var(--text2);line-height:1.6}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:1100px;margin:3rem auto 0}
+@media(max-width:768px){.steps{grid-template-columns:1fr}}
+.step{text-align:center}
+.step-num{width:56px;height:56px;border-radius:50%;background:var(--bg2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:1.4rem;letter-spacing:1px;color:var(--acc);margin:0 auto 1.2rem}
+.step-title{font-family:var(--fh);font-size:1.2rem;letter-spacing:.5px;margin-bottom:.5rem}
+.step-desc{font-size:.85rem;color:var(--text2);line-height:1.6}
+
+.diff{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:1100px;margin:3rem auto 0}
+@media(max-width:768px){.diff-grid{grid-template-columns:1fr}}
+.diff-item{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.4rem;display:flex;align-items:flex-start;gap:1rem;transition:border-color .2s}
+.diff-item:hover{border-color:var(--border2)}
+.diff-check{width:24px;height:24px;border-radius:50%;background:rgba(184,255,0,.1);border:1px solid rgba(184,255,0,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.diff-check svg{width:12px;height:12px;stroke:var(--acc);fill:none;stroke-width:2.5;stroke-linecap:round}
+.diff-title{font-size:.92rem;font-weight:600;margin-bottom:.25rem}
+.diff-desc{font-size:.8rem;color:var(--text2);line-height:1.5}
+
+.precos-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:800px;margin:3rem auto 0}
+@media(max-width:600px){.precos-grid{grid-template-columns:1fr}}
+.preco-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:2rem;position:relative;transition:border-color .2s}
+.preco-card:hover{border-color:var(--border2)}
+.preco-card.destaque{border-color:var(--acc);background:linear-gradient(135deg,#0A1400,var(--bg2))}
+.preco-popular{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--acc);color:#000;font-family:var(--fh);font-size:.8rem;letter-spacing:.5px;padding:.25rem 1rem;border-radius:20px;white-space:nowrap}
+.preco-nome{font-family:var(--fh);font-size:1.3rem;letter-spacing:1px;margin-bottom:.3rem}
+.preco-desc{font-size:.78rem;color:var(--text2);margin-bottom:1.5rem}
+.preco-valor{display:flex;align-items:baseline;gap:.3rem;margin-bottom:1.5rem}
+.preco-cifrao{font-size:1rem;color:var(--text2);font-weight:500}
+.preco-num{font-family:var(--fh);font-size:3rem;letter-spacing:-1px;line-height:1;color:var(--acc)}
+.preco-periodo{font-size:.8rem;color:var(--text3)}
+.preco-features{list-style:none;margin-bottom:1.5rem}
+.preco-feat{display:flex;align-items:center;gap:.6rem;padding:.4rem 0;font-size:.83rem;color:var(--text2);border-bottom:1px solid var(--border)}
+.preco-feat:last-child{border-bottom:none}
+.preco-feat svg{width:14px;height:14px;stroke:var(--acc);fill:none;stroke-width:2.5;stroke-linecap:round;flex-shrink:0}
+.btn-preco{width:100%;padding:.75rem;border-radius:6px;font-family:var(--fh);font-size:1rem;letter-spacing:.5px;cursor:pointer;text-align:center;text-decoration:none;display:block;transition:all .2s}
+.btn-preco-ghost{border:1px solid var(--border2);background:transparent;color:var(--text2)}
+.btn-preco-ghost:hover{border-color:var(--acc);color:var(--acc)}
+.btn-preco-solid{background:var(--acc);color:#000;border:none}
+.btn-preco-solid:hover{opacity:.88}
+
+.faq-list{max-width:700px;margin:3rem auto 0}
+.faq-item{border-bottom:1px solid var(--border);overflow:hidden}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 0;cursor:pointer;font-size:.95rem;font-weight:500;gap:1rem;transition:color .2s}
+.faq-q:hover{color:var(--acc)}
+.faq-q svg{width:18px;height:18px;stroke:var(--text3);fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0;transition:transform .3s}
+.faq-item.open .faq-q svg{transform:rotate(45deg);stroke:var(--acc)}
+.faq-a{font-size:.88rem;color:var(--text2);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
+.faq-item.open .faq-a{max-height:200px;padding-bottom:1.2rem}
+
+.cta-final{background:var(--bg);padding:8rem 5%;text-align:center;position:relative;overflow:hidden}
+.cta-final::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 100%,rgba(184,255,0,.06),transparent 70%);pointer-events:none}
+.cta-final h2{font-family:var(--fh);font-size:clamp(2.5rem,6vw,5rem);letter-spacing:2px;line-height:1;margin-bottom:1rem;position:relative}
+.cta-final h2 span{color:var(--acc)}
+.cta-final p{font-size:1rem;color:var(--text2);margin-bottom:2.5rem;position:relative}
+
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:var(--fh);font-size:1.3rem;letter-spacing:2px}
+.footer-logo span{color:var(--acc)}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.footer-links a{color:var(--text3);font-size:.8rem;text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--text2)}
+.footer-copy{font-size:.75rem;color:var(--text3)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  nav{padding:1rem 5%}
+  .nav-links{display:none}
+  section{padding:4rem 5%}
+  .hero{padding:6rem 5% 3rem}
+  .hero-stats{gap:2rem}
+  footer{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo">LUMEX<span>FIT</span></div>
+  <div class="nav-links">
+    <a href="#features">Funcionalidades</a>
+    <a href="#como">Como funciona</a>
+    <a href="#precos">Preços</a>
+    <a href="#faq">FAQ</a>
+    <a href="https://lumexfit.vercel.app" class="nav-cta">Entrar no app</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      APP PREMIUM PARA PERSONAL TRAINER
+    </div>
+    <h1>ELEVE SUA<br><span>CARREIRA</span><br>AO PRÓXIMO NÍVEL</h1>
+    <p class="hero-sub">Prescreva treinos profissionais, acompanhe a evolução dos seus alunos e construa uma reputação de excelência — tudo em um único app.</p>
+    <div class="hero-actions">
+      <a href="#precos" class="btn-hero">
+        Começar agora
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#como" class="btn-ghost-hero">Ver como funciona</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="hero-stat-n">122+</span>
+        <div class="hero-stat-l">Exercícios</div>
+      </div>
+      <div style="width:1px;height:40px;background:var(--border)"></div>
+      <div>
+        <span class="hero-stat-n">100%</span>
+        <div class="hero-stat-l">Online</div>
+      </div>
+      <div style="width:1px;height:40px;background:var(--border)"></div>
+      <div>
+        <span class="hero-stat-n">30s</span>
+        <div class="hero-stat-l">Para enviar treino</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg)" id="problema">
+  <div class="problema-grid">
+    <div class="reveal">
+      <div class="section-tag">O problema</div>
+      <h2 class="section-title">Você ainda usa<br><span>planilha?</span></h2>
+      <p class="section-sub">Personal trainers autônomos perdem tempo e dinheiro com ferramentas improvisadas que não transmitem profissionalismo para os alunos.</p>
+    </div>
+    <ul class="dor-list reveal">
+      <li class="dor-item">
+        <div class="dor-icon"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+        <div class="dor-text"><strong>Planilhas no WhatsApp</strong> — o aluno não sabe o que fazer, te chama toda hora e acha que você é amador.</div>
+      </li>
+      <li class="dor-item">
+        <div class="dor-icon"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+        <div class="dor-text"><strong>Sem controle de evolução</strong> — você não sabe se o aluno está progredindo, aumentando carga ou faltando treinos.</div>
+      </li>
+      <li class="dor-item">
+        <div class="dor-icon"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+        <div class="dor-text"><strong>Aparência amadora</strong> — enquanto você manda PDF, outros personals entregam app com vídeo, timer e histórico.</div>
+      </li>
+      <li class="dor-item">
+        <div class="dor-icon"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+        <div class="dor-text"><strong>Perda de alunos</strong> — aluno sem acompanhamento desiste. Você perde a mensalidade e a indicação.</div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="reveal">
+      <div class="section-tag">Funcionalidades</div>
+      <h2 class="section-title">Tudo que você precisa<br><span>em um só lugar</span></h2>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M6 4v16M18 4v16M6 12h12"/></svg></div>
+        <div class="feat-title">Prescrição de treinos</div>
+        <div class="feat-desc">Monte treinos completos com exercícios, séries, repetições e descanso. Envie para o aluno em segundos.</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+        <div class="feat-title">Vídeos demonstrativos</div>
+        <div class="feat-desc">122+ exercícios com vídeos do YouTube integrados. O aluno vê a execução correta antes de cada série.</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <div class="feat-title">Timer de descanso</div>
+        <div class="feat-desc">Timer automático entre séries. O aluno sabe exatamente quanto tempo descansar sem precisar olhar o relógio.</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="feat-title">Evolução de carga</div>
+        <div class="feat-desc">O aluno registra o peso usado em cada série. Você acompanha a progressão e ajusta os treinos na hora certa.</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg></div>
+        <div class="feat-title">Periodização inteligente</div>
+        <div class="feat-desc">Defina períodos de 30, 45, 60 ou 90 dias. O app avisa quando é hora de renovar o treino do aluno.</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="feat-title">Gestão de alunos</div>
+        <div class="feat-desc">Perfil completo com IMC, histórico de treinos e objetivos. Todos os seus alunos organizados em um painel.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg)" id="como">
+  <div style="max-width:1100px;margin:0 auto;text-align:center">
+    <div class="reveal">
+      <div class="section-tag" style="justify-content:center">Como funciona</div>
+      <h2 class="section-title">Simples assim</h2>
+      <p class="section-sub" style="margin:0 auto">Em menos de 5 minutos você já tem seu primeiro aluno recebendo treino profissional pelo app.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div class="step-title">Cadastre seus alunos</div>
+        <div class="step-desc">Crie o perfil com nome, objetivo, nível e dados físicos. O aluno recebe acesso imediato ao app.</div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <div class="step-title">Monte o treino</div>
+        <div class="step-desc">Escolha exercícios da biblioteca, defina séries, reps e descanso. Defina o período de 30 a 90 dias.</div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <div class="step-title">Aluno treina com app</div>
+        <div class="step-desc">O aluno abre o app, vê o treino do dia, assiste os vídeos, marca as séries e registra as cargas.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="diff" id="diferenciais">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="reveal">
+      <div class="section-tag">Por que LUMEXFIT</div>
+      <h2 class="section-title">Feito para personal<br><span>autônomo</span></h2>
+      <p class="section-sub">Não somos um app para academia. Somos feitos especificamente para o personal que atende de forma independente.</p>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-item reveal">
+        <div class="diff-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><div class="diff-title">Visual premium que impressiona</div><div class="diff-desc">Seu aluno vai mostrar o app para os amigos. Aparência profissional que aumenta sua percepção de valor.</div></div>
+      </div>
+      <div class="diff-item reveal">
+        <div class="diff-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><div class="diff-title">Sem limite de alunos no Pro</div><div class="diff-desc">Pague um valor fixo e cadastre quantos alunos quiser. Sem surpresas na fatura quando crescer.</div></div>
+      </div>
+      <div class="diff-item reveal">
+        <div class="diff-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><div class="diff-title">122 exercícios com vídeo</div><div class="diff-desc">Biblioteca completa pronta para usar. Pernas, peito, costas, ombro, bíceps, tríceps, core e cardio.</div></div>
+      </div>
+      <div class="diff-item reveal">
+        <div class="diff-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><div class="diff-title">Periodização que fideliza</div><div class="diff-desc">Aluno vê que o treino tem prazo e evolução planejada. Fica mais tempo e indica mais amigos.</div></div>
+      </div>
+      <div class="diff-item reveal">
+        <div class="diff-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><div class="diff-title">Funciona como app no celular</div><div class="diff-desc">Aluno adiciona à tela inicial. Parece um app nativo sem precisar de Play Store ou App Store.</div></div>
+      </div>
+      <div class="diff-item reveal">
+        <div class="diff-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><div class="diff-title">Atualizações contínuas</div><div class="diff-desc">O app evolui constantemente. Novas funcionalidades chegam automaticamente sem custo adicional.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg)" id="precos">
+  <div style="max-width:1100px;margin:0 auto;text-align:center">
+    <div class="reveal">
+      <div class="section-tag" style="justify-content:center">Planos</div>
+      <h2 class="section-title">Investimento que<br><span>se paga sozinho</span></h2>
+      <p class="section-sub" style="margin:0 auto">Com um único aluno a mais por mês, o app já se paga. O resto é lucro puro.</p>
+    </div>
+    <div class="precos-grid">
+      <div class="preco-card reveal">
+        <div class="preco-nome">Starter</div>
+        <div class="preco-desc">Para quem está começando</div>
+        <div class="preco-valor">
+          <span class="preco-cifrao">R$</span>
+          <span class="preco-num">69</span>
+          <span class="preco-periodo">/mês</span>
+        </div>
+        <ul class="preco-features">
+          <li class="preco-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Até 10 alunos</li>
+          <li class="preco-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>122 exercícios com vídeo</li>
+          <li class="preco-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Prescrição ilimitada</li>
+          <li class="preco-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Periodização de treinos</li>
+          <li class="preco-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Suporte por WhatsApp</li>
+        </ul>
+        <a href="https://lumexfit.vercel.app" class="btn-preco btn-preco-ghost">Começar agora</a>
+      </div>
+      <div class="preco-card destaque reveal">
+        <div class="preco-popular">MAIS POPULAR</div>
+        <div class="preco-nome">Pro</div>
+        <div class="preco-desc">Para personal em crescimento</div>
+        <div class="preco-valor">
+          <span class="preco-cifrao">R$</span>
+          <span class="preco-num">99</span>
+          <span class="preco-periodo">/mês</span>
+        </div>
+        <ul class="preco-features">
+          <li class="preco-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><strong>Alunos ilimitados</strong></li>
+          <li class="preco-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>122 exercícios com vídeo</li>
+          <li class="preco-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Prescrição ilimitada</li>
+          <li class="preco-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Periodização de treinos</li>
+          <li class="preco-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><strong>Fotos de progresso</strong></li>
+          <li class="preco-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><strong>Chat com alunos</strong></li>
+          <li class="preco-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Suporte prioritário</li>
+        </ul>
+        <a href="https://lumexfit.vercel.app" class="btn-preco btn-preco-solid">Assinar Pro</a>
+      </div>
+    </div>
+    <p style="font-size:.78rem;color:var(--text3);margin-top:1.5rem">Cancele quando quiser. Sem fidelidade. Sem multa.</p>
+  </div>
+</section>
+
+<section style="background:var(--bg2);border-top:1px solid var(--border)" id="faq">
+  <div style="max-width:700px;margin:0 auto;text-align:center">
+    <div class="reveal">
+      <div class="section-tag" style="justify-content:center">Dúvidas</div>
+      <h2 class="section-title">Perguntas <span>frequentes</span></h2>
+    </div>
+    <div class="faq-list" style="text-align:left">
+      <div class="faq-item">
+        <div class="faq-q">Preciso instalar alguma coisa?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
+        <div class="faq-a">Não. O LUMEXFIT é 100% online. Você acessa pelo navegador do celular ou computador. O aluno pode adicionar à tela inicial e funciona como um app nativo.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Meu aluno precisa pagar algo?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
+        <div class="faq-a">Não. O aluno acessa gratuitamente. Só o personal paga a mensalidade do app.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Posso cancelar quando quiser?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
+        <div class="faq-a">Sim. Sem fidelidade, sem multa. Cancele quando quiser direto pelo painel.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Funciona para consultorias online?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
+        <div class="faq-a">Perfeitamente. O app foi feito para atendimento remoto. Seu aluno pode estar em qualquer cidade do Brasil.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Posso adicionar meus próprios exercícios?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
+        <div class="faq-a">Sim. Além dos 122 exercícios padrão, você pode criar exercícios personalizados com seu próprio vídeo e descrição.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <h2 class="reveal">PRONTO PARA<br>CRESCER <span>DE VERDADE?</span></h2>
+  <p class="reveal">Junte-se aos personals que já entregam uma experiência premium para seus alunos.</p>
+  <a href="https://lumexfit.vercel.app" class="btn-hero reveal" style="display:inline-flex">
+    Começar agora
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</section>
+
+<footer>
+  <div class="footer-logo">LUMEX<span>FIT</span></div>
+  <div class="footer-links">
+    <a href="#features">Funcionalidades</a>
+    <a href="#precos">Preços</a>
+    <a href="#faq">FAQ</a>
+    <a href="https://lumexfit.vercel.app">Entrar no app</a>
+  </div>
+  <div class="footer-copy">© 2026 LUMEXFIT. Todos os direitos reservados.</div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50);
+});
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.querySelector('.faq-q').addEventListener('click',()=>{
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!isOpen)item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
