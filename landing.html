@@ -16,8 +16,8 @@
       --border: #1a1a1a; --border2: #222;
       --fh: 'Bebas Neue', sans-serif; --fb: 'Inter', sans-serif;
     }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--fb); background: var(--bg); color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { font-family: var(--fb); background: var(--bg); color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; width: 100%; max-width: 100vw; }
 
     .nav-links { display: flex; align-items: center; gap: 1.8rem; }
     .nav-links a { font-size: .75rem; color: var(--text2); text-decoration: none; font-weight: 500; transition: color .15s; letter-spacing: .03em; }
@@ -399,6 +399,13 @@
     .full-section .features-section,
     .full-section .diff-inner,
     .full-section .test-inner { max-width: 1100px; margin: 0 auto; }
+
+    @media (max-width: 480px) {
+      section, .full-section { overflow-x: hidden; }
+      .stat-row { flex-wrap: wrap; justify-content: center; }
+      .diff-table { font-size: .7rem; }
+      .diff-table th, .diff-table td { padding: .5rem .5rem; }
+    }
   </style>
 </head>
 <body>
@@ -457,7 +464,7 @@
   <!-- APRESENTAÇÃO ANIMADA -->
   <section id="como-funciona" style="padding:5rem 1.5rem;background:var(--bg)">
     <div style="max-width:720px;margin:0 auto;position:relative">
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(184,255,0,.05),transparent 70%);pointer-events:none;z-index:0"></div>
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(500px,100vw);height:min(500px,100vw);background:radial-gradient(circle,rgba(184,255,0,.05),transparent 70%);pointer-events:none;z-index:0"></div>
 
       <div style="text-align:center;margin-bottom:2.5rem;position:relative;z-index:1">
         <div class="section-eyebrow">LUMEXFIT — O APP POR DENTRO</div>
@@ -465,10 +472,10 @@
         <p style="font-size:.85rem;color:var(--text3);margin-top:.5rem">Personal trainer autônomo · App premium · Alunos que ficam</p>
       </div>
 
-      <div style="display:flex;justify-content:center;gap:2.5rem;align-items:flex-start;flex-wrap:wrap;position:relative;z-index:1">
+      <div style="display:flex;justify-content:center;gap:2.5rem;align-items:flex-start;flex-wrap:wrap;position:relative;z-index:1;max-width:100%;overflow:hidden">
 
         <!-- PHONE -->
-        <div style="width:200px;flex-shrink:0">
+        <div style="width:200px;flex-shrink:0;max-width:calc(100vw - 3rem)">
           <div style="font-size:.58rem;color:var(--text3);text-align:center;margin-bottom:.5rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600" id="ap-phone-lbl">Painel do Personal</div>
           <div style="background:#0D0D0D;border-radius:28px;border:5px solid #1a1a1a;box-shadow:0 0 0 1px #2a2a2a,0 40px 80px rgba(0,0,0,.7);overflow:hidden">
             <div style="background:#0D0D0D;height:20px;display:flex;align-items:center;justify-content:center"><div style="background:#1a1a1a;width:50px;height:8px;border-radius:4px"></div></div>
